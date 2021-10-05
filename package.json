@@ -1,0 +1,27 @@
+{
+  "name": "teste-lista-telefonica-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.ts",
+  "scripts": {
+    "dev": "ts-node ./api.ts"
+  },
+  "keywords": [
+    "typescript",
+    "lista",
+    "telefonica"
+  ],
+  "author": "Donato Cardoso Avila",
+  "license": "MIT",
+  "dependencies": {
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
