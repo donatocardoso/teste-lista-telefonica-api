@@ -1,15 +1,34 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from 'routing-controllers';
+import { Body, Delete, Get, JsonController, Param, Post, Put } from 'routing-controllers';
+import HttpStatus from '../enums/HttpStatus';
+import Contato from '../models/contato';
+import Return from '../models/Return';
+import ContatoService from '../services/ContatoService';
 
-@Controller()
+@JsonController("", {transformResponse: false})
 export class ContatoController {
   @Get('/contato')
-  getAll() {
-    return 'essa ação retorna todos os contatos';
+  async getAll() {
+    var retorno = await ContatoService.get();
+
+    if (retorno.StatusCode != HttpStatus.Ok)
+      return null;
+    
+    return retorno;
   }
 
   @Get('/contato/:id')
-  getOne(@Param('id') id: number) {
-    return 'essa ação retorna o contato #' + id;
+  async getOne(@Param('id') id: number): Promise<Return<Contato>> {
+    var retorno = await ContatoService.getById(id);
+
+    if (retorno.StatusCode != HttpStatus.Ok)
+      return retorno;
+    
+    return retorno;
+  }
+
+  @Get('/contato/search/:text')
+  getOneByText(@Param('text') text: number) {
+    return 'essa ação retorna o contato com texto: ' + text;
   }
 
   @Post('/contato')
