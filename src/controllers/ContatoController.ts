@@ -4,7 +4,7 @@ import Contato from '../models/contato';
 import Return from '../models/Return';
 import ContatoService from '../services/ContatoService';
 
-@JsonController("", {transformResponse: false})
+@JsonController("", { transformResponse: false })
 export class ContatoController {
   @Get('/contato')
   async getAll() {
@@ -12,7 +12,7 @@ export class ContatoController {
 
     if (retorno.StatusCode != HttpStatus.Ok)
       return null;
-    
+
     return retorno;
   }
 
@@ -22,27 +22,47 @@ export class ContatoController {
 
     if (retorno.StatusCode != HttpStatus.Ok)
       return retorno;
-    
+
     return retorno;
   }
 
   @Get('/contato/search/:text')
-  getOneByText(@Param('text') text: number) {
-    return 'essa ação retorna o contato com texto: ' + text;
+  async getByText(@Param('text') text: string) {
+    var retorno = await ContatoService.getByText(text);
+
+    if (retorno.StatusCode != HttpStatus.Ok)
+      return retorno;
+
+    return retorno;
   }
 
   @Post('/contato')
-  post(@Body() contato: any) {
-    return 'salvando contato...';
+  async post(@Body() contato: Contato) {
+    var retorno = await ContatoService.post(contato);
+
+    if (retorno.StatusCode != HttpStatus.Ok)
+      return retorno;
+
+    return retorno;
   }
 
   @Put('/contato/:id')
-  put(@Param('id') id: number, @Body() contato: any) {
-    return 'atualizando a contato...';
+  async put(@Param('id') id: number, @Body() contato: Contato) {
+    var retorno = await ContatoService.put(id, contato);
+
+    if (retorno.StatusCode != HttpStatus.Ok)
+      return retorno;
+
+    return retorno;
   }
 
   @Delete('/contato/:id')
-  remove(@Param('id') id: number) {
-    return 'removendo contato...';
+  async remove(@Param('id') id: number) {
+    var retorno = await ContatoService.remove(id);
+
+    if (retorno.StatusCode != HttpStatus.Ok)
+      return retorno;
+
+    return retorno;
   }
 }

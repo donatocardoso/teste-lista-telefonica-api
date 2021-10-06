@@ -1,6 +1,6 @@
 import HttpStatus from "../enums/HttpStatus";
 
-export default class Return<T>
+export default class Return<T = null>
 {
     StatusCode: HttpStatus;
     Message: string;
