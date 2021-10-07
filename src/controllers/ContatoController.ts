@@ -1,5 +1,5 @@
 import { Body, Delete, Get, JsonController, Param, Post, Put } from 'routing-controllers';
-import HttpStatus from '../enums/HttpStatus';
+import HttpCode from '../enums/HttpCode';
 import Contato from '../models/contato';
 import Return from '../models/Return';
 import ContatoService from '../services/ContatoService';
@@ -10,7 +10,7 @@ export class ContatoController {
   async getAll() {
     var retorno = await ContatoService.get();
 
-    if (retorno.StatusCode != HttpStatus.Ok)
+    if (retorno.HttpCode != HttpCode.Ok)
       return null;
 
     return retorno;
@@ -20,7 +20,7 @@ export class ContatoController {
   async getOne(@Param('id') id: number): Promise<Return<Contato>> {
     var retorno = await ContatoService.getById(id);
 
-    if (retorno.StatusCode != HttpStatus.Ok)
+    if (retorno.HttpCode != HttpCode.Ok)
       return retorno;
 
     return retorno;
@@ -30,7 +30,7 @@ export class ContatoController {
   async getByText(@Param('text') text: string) {
     var retorno = await ContatoService.getByText(text);
 
-    if (retorno.StatusCode != HttpStatus.Ok)
+    if (retorno.HttpCode != HttpCode.Ok)
       return retorno;
 
     return retorno;
@@ -40,7 +40,7 @@ export class ContatoController {
   async post(@Body() contato: Contato) {
     var retorno = await ContatoService.post(contato);
 
-    if (retorno.StatusCode != HttpStatus.Ok)
+    if (retorno.HttpCode != HttpCode.Ok)
       return retorno;
 
     return retorno;
@@ -50,7 +50,7 @@ export class ContatoController {
   async put(@Param('id') id: number, @Body() contato: Contato) {
     var retorno = await ContatoService.put(id, contato);
 
-    if (retorno.StatusCode != HttpStatus.Ok)
+    if (retorno.HttpCode != HttpCode.Ok)
       return retorno;
 
     return retorno;
@@ -60,7 +60,7 @@ export class ContatoController {
   async remove(@Param('id') id: number) {
     var retorno = await ContatoService.remove(id);
 
-    if (retorno.StatusCode != HttpStatus.Ok)
+    if (retorno.HttpCode != HttpCode.Ok)
       return retorno;
 
     return retorno;

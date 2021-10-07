@@ -12,6 +12,9 @@ module.exports = {
       nome: {
         type: Sequelize.TEXT
       },
+      email: {
+        type: Sequelize.TEXT
+      },
       celular: {
         type: Sequelize.TEXT
       },
@@ -23,10 +26,12 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
+        defaultValue: Date.now(),
         type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
+        defaultValue: Date.now(),
         type: Sequelize.DATE
       }
     });

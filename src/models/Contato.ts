@@ -5,6 +5,7 @@ export default class Contato extends Model {
     this.init(
       {
         nome: Sequelize.TEXT,
+        email: Sequelize.TEXT,
         celular: Sequelize.TEXT,
         telefone: Sequelize.TEXT,
         ativo: {

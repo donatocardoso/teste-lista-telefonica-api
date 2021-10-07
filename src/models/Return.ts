@@ -1,14 +1,14 @@
-import HttpStatus from "../enums/HttpStatus";
+import HttpCode from "../enums/HttpCode";
 
-export default class Return<T = null>
+export default class Return<T = undefined>
 {
-    StatusCode: HttpStatus;
+    HttpCode: HttpCode;
     Message: string;
-    Content: T;
+    Content?: T;
 
-	constructor(statusCode: HttpStatus = 200, message: string = 'OK', content: T = null)
+	constructor(httpCode: HttpCode = 200, message: string = 'OK', content?: T)
 	{
-		this.StatusCode = statusCode;
+		this.HttpCode = httpCode;
 		this.Message = message;
 		this.Content = content;
 	}

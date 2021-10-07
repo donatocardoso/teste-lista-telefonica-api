@@ -1,7 +1,8 @@
 import { Options } from 'sequelize';
 import databases from './databases.json';
 
-const database = databases[process.env.NODE_ENV ?? 'development' ];
+const env: string = process.env.NODE_ENV ?? 'development';
+const database: any = {...databases}[env];
 
 const config: Options = {
   dialect: database.dialect,

@@ -4,8 +4,9 @@
   "description": "",
   "main": "api.ts",
   "scripts": {
-    "db:migrate": "npx sequelize-cli db:migrate",
-    "predev": "yarn db:migrate",
+    "db:migrate": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate",
+    "db:seeds": "npx sequelize-cli db:seed:all",
+    "predev": "yarn db:migrate && yarn db:seeds",
     "dev": "ts-node ./api.ts"
   },
   "keywords": [

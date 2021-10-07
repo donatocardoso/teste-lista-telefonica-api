@@ -1,4 +1,4 @@
-import { Op } from "sequelize/types";
+import { Op } from "sequelize";
 import SequelizeConnection from "../databases";
 import Contato from "../models/contato";
 import Return from "../models/Return";
@@ -13,6 +13,7 @@ class ContatoRepository extends SequelizeConnection {
       attributes: [
         'id',
         'nome',
+        'email',
         'celular',
         'telefone'
       ],
@@ -31,6 +32,7 @@ class ContatoRepository extends SequelizeConnection {
       attributes: [
         'id',
         'nome',
+        'email',
         'celular',
         'telefone',
         'ativo'
@@ -51,6 +53,7 @@ class ContatoRepository extends SequelizeConnection {
       attributes: [
         'id',
         'nome',
+        'email',
         'celular',
         'telefone',
         'ativo'
