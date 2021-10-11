@@ -8,7 +8,6 @@
     "dev": "nodemon",
     "build": "tsc --build",
     "clean": "rm -rf ./build",
-    "prestart": "npm run build && yarn db:migrate",
     "start": "node build/src/api.js"
   },
   "keywords": [
