@@ -2,14 +2,14 @@
   "name": "teste-lista-telefonica-api",
   "version": "1.0.0",
   "description": "",
-  "main": "api.ts",
+  "main": "src/api.ts",
   "scripts": {
     "typeorm": "typeorm",    
     "dev": "nodemon",
     "build": "tsc --build",
-    "clean": "tsc --build --clean && rm -rf ./build",
+    "clean": "rm -rf ./build",
     "prestart": "npm run build && yarn db:migrate",
-    "start": "node build/src/index.js"
+    "start": "node build/src/api.js"
   },
   "keywords": [
     "typescript",

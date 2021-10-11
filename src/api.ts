@@ -2,7 +2,7 @@ import "class-transformer";
 import path from 'path';
 import "reflect-metadata";
 import { createExpressServer } from 'routing-controllers';
-import TypeOrmConnection from './src/connections/TypeOrm';
+import TypeOrmConnection from './connections/TypeOrm';
 
 const PORT = process.env.PORT || 8080;
 
