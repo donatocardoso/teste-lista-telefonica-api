@@ -4,10 +4,12 @@
   "description": "",
   "main": "api.ts",
   "scripts": {
-    "db:migrate": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate",
-    "db:seeds": "npx sequelize-cli db:seed:all",
-    "predev": "yarn db:migrate && yarn db:seeds",
-    "dev": "ts-node ./api.ts"
+    "typeorm": "typeorm",    
+    "dev": "nodemon",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean && rm -rf ./build",
+    "prestart": "npm run build && yarn db:migrate",
+    "start": "node build/src/index.js"
   },
   "keywords": [
     "typescript",
@@ -17,18 +19,20 @@
   "author": "Donato Cardoso Avila",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
-    "reflect-metadata": "^0.1.13",
+    "reflect-metadata": "^0.1.10",
     "routing-controllers": "^0.9.0",
-    "sequelize": "^6.6.5",
     "sqlite": "^4.0.23",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "typeorm": "0.2.38"
   },
   "devDependencies": {
-    "@types/node": "^16.10.2",
-    "sequelize-cli": "^6.2.0",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
+    "@types/node": "^8.0.29",
+    "@types/validator": "^13.6.3",
+    "nodemon": "^2.0.13",
+    "ts-node": "3.3.0",
+    "typescript": "3.3.3333"
   }
 }

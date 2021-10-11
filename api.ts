@@ -1,10 +1,19 @@
+import "class-transformer";
 import path from 'path';
 import "reflect-metadata";
 import { createExpressServer } from 'routing-controllers';
+import TypeOrmConnection from './src/connections/TypeOrm';
 
-const app = createExpressServer({
-    routePrefix: '/api/toki-toki',
-    controllers: [path.join(__dirname, '/src/controllers/*.ts')],
-});
+const PORT = process.env.PORT || 8080;
 
-app.listen(8080, () => console.log('Servidor online...'));
+if (process.env.NODE_ENV !== 'test') {
+    TypeOrmConnection.init((conn) => {
+        const app = createExpressServer({
+            classTransformer: true,
+            routePrefix: '/api/toki-toki',            
+            controllers: [path.join(__dirname, '/src/controllers/**/*')],
+        });
+        
+        app.listen(PORT, () => console.log(`Servidor online na porta ${PORT}...`))
+    });
+}

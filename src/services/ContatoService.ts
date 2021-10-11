@@ -1,5 +1,5 @@
-import Contato from "../models/contato";
-import Return from "../models/Return";
+import Contato from "../dtos/ContatoDto";
+import Return from "../dtos/Return";
 import ContatoRepository from "../repositories/ContatoRepository";
 
 class ContatoService {
@@ -19,7 +19,7 @@ class ContatoService {
         return ContatoRepository.post(model);
     }
 
-    async put(id: number, model: Contato) : Promise<Return<Contato[]>> {
+    async put(id: number, model: Contato) : Promise<Return> {
         return ContatoRepository.put(id, model);
     }
 

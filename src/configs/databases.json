@@ -1,9 +1,0 @@
-{
-  "development": {
-    "dialect": "sqlite",
-    "host": "/tmp/database.db",
-    "username": "root",
-    "password": null,
-    "database": "database_development"
-  }
-}

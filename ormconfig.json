@@ -1,0 +1,24 @@
+{
+   "name": "default",
+   "type": "sqlite",
+   "host": "localhost",
+   "username": "root",
+   "password": "t0k1t0k1",
+   "database": "/tmp/db_toki_toki",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "build/src/entities/**/*.js"
+   ],
+   "migrations": [
+      "build/src/migrations/**/*.js",
+      "build/src/seeds/**/*.js"
+   ],
+   "subscribers": [
+      "build/src/subscribers/**/*.js"
+   ],
+   "cli": {
+      "entitiesDir": "build/src/entities",
+      "migrationsDir": ["build/src/migrations", "build/src/seeds"]
+   }
+}

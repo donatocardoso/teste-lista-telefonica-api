@@ -1,9 +1,16 @@
 # FOLDERS
 
+.idea/
+.vscode/
 node_modules/
+build/
 tmp/
+temp/
 
 # FILES
+
+**/*.js
+**/*.map
 
 package-lock.json
 yarn-error.log

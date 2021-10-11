@@ -1,24 +1,22 @@
-import { Op } from "sequelize";
-import SequelizeConnection from "../databases";
-import Contato from "../models/contato";
-import Return from "../models/Return";
+import { AbstractRepository, EntityRepository, getCustomRepository } from "typeorm";
+import ContatoEntity from "../entities/ContatoEntity";
+import ContatoDto from "../dtos/ContatoDto";
+import Return from "../dtos/Return";
 
-class ContatoRepository extends SequelizeConnection {
-  constructor() {
-    super();
-  }
+@EntityRepository(ContatoEntity)
+class ContatoRepository extends AbstractRepository<ContatoEntity> {
 
-  async get(): Promise<Return<Contato[]>> {
-    let contatos = await Contato.findAll({
-      attributes: [
-        'id',
-        'nome',
-        'email',
-        'celular',
-        'telefone'
+  async get(): Promise<Return<ContatoEntity[]>> {
+    let contatos = await this.repository.find({
+      select: [
+        'Id',
+        'Nome',
+        'Email',
+        'Celular',
+        'Telefone'
       ],
       where: {
-        ativo: true
+        Ativo: true
       }
     });
 
@@ -27,19 +25,18 @@ class ContatoRepository extends SequelizeConnection {
     return new Return(200, 'OK', contatos);
   }
 
-  async getById(id: number): Promise<Return<Contato>> {
-    let contato = await Contato.findOne({
-      attributes: [
-        'id',
-        'nome',
-        'email',
-        'celular',
-        'telefone',
-        'ativo'
+  async getById(id: number): Promise<Return<ContatoEntity>> {
+    let contato = await this.repository.findOne({
+      select: [
+        'Id',
+        'Nome',
+        'Email',
+        'Celular',
+        'Telefone'
       ],
       where: {
-        id,
-        ativo: true
+        Id: id,
+        Ativo: true
       },
     });
 
@@ -48,36 +45,29 @@ class ContatoRepository extends SequelizeConnection {
     return new Return(200, 'OK', contato);
   }
 
-  async getByText(text: string): Promise<Return<Contato[]>> {
-    let contatos = await Contato.findAll({
-      attributes: [
-        'id',
-        'nome',
-        'email',
-        'celular',
-        'telefone',
-        'ativo'
+  async getByText(text: string): Promise<Return<ContatoEntity[]>> {
+    let contatos = await this.repository.find({
+      select: [
+        'Id',
+        'Nome',
+        'Email',
+        'Celular',
+        'Telefone'
       ],
-      where: {        
-        [Op.or]: [
-          {
-            nome: {
-              [Op.like]: `%${text}%`
-            }
-          },
-          {
-            celular: {
-              [Op.like]: `%${text}%`
-            }
-          },
-          {
-            telefone: {
-              [Op.like]: `%${text}%`
-            }
-          }
-        ],
-        ativo: true,
-      },
+      where: [
+        {
+          Nome: `%${text}%`,
+          Ativo: true
+        },
+        {
+          Celular: `%${text}%`,
+          Ativo: true
+        },
+        {
+          Telefone: `%${text}%`,
+          Ativo: true
+        }
+      ],
     });
 
     if (!contatos) return new Return(400, 'contato não encontrado');
@@ -85,39 +75,33 @@ class ContatoRepository extends SequelizeConnection {
     return new Return(200, 'OK', contatos);
   }
 
-  async post(model: Contato): Promise<Return<Contato>> {
-    var contato = await Contato.create(model);
+  async post(model: ContatoDto): Promise<Return<ContatoEntity>> {
+    var contato = await this.repository.save(model);
 
     if (!contato) return new Return(400, 'contato não cadastrado');
 
     return new Return(200, 'OK', contato);
   }
 
-  async put(id: number, model: Contato): Promise<Return<Contato[]>> {
-    var [total, contatos] = await Contato.update(model, {
-      where: {
-        id
-      }
+  async put(id: number, model: ContatoDto): Promise<Return> {
+    var contatos = await this.repository.update(model, {
+      Id: id
     });
 
-    if (total == 0) return new Return(400, 'contatos não atualizados');
+    if (!contatos.affected) return new Return(400, 'contatos não atualizados');
 
-    return new Return(200, 'OK', contatos);
+    return new Return(200, 'OK');
   }
 
   async remove(id: number): Promise<Return> {
-    var [total, contatos] = await Contato.update({
-      ativo: false,
-    }, {
-      where: {
-        id
-      }
+    var contato = await this.repository.update({ Ativo: false }, {
+      Id: id
     });
 
-    if (total == 0) return new Return(400, 'contato não deletado');
+    if (!contato.affected) return new Return(400, 'contato não deletado');
 
     return new Return(200, 'OK');
   }
 }
 
-export default new ContatoRepository();
+export default getCustomRepository(ContatoRepository);

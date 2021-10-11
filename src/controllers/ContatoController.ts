@@ -1,67 +1,67 @@
-import { Body, Delete, Get, JsonController, Param, Post, Put } from 'routing-controllers';
+import { Body, Delete, Get, HttpError, JsonController, Param, Post, Put } from 'routing-controllers';
+import ContatoDto from '../dtos/ContatoDto';
+import Return from '../dtos/Return';
 import HttpCode from '../enums/HttpCode';
-import Contato from '../models/contato';
-import Return from '../models/Return';
 import ContatoService from '../services/ContatoService';
 
-@JsonController("", { transformResponse: false })
+@JsonController("/contato", { transformResponse: true  })
 export class ContatoController {
-  @Get('/contato')
-  async getAll() {
+  @Get('/')
+  async getAll(): Promise<Return<ContatoDto[]>> {
     var retorno = await ContatoService.get();
 
     if (retorno.HttpCode != HttpCode.Ok)
-      return null;
+      throw new HttpError(retorno.HttpCode, retorno.Message);
 
     return retorno;
   }
 
-  @Get('/contato/:id')
-  async getOne(@Param('id') id: number): Promise<Return<Contato>> {
+  @Get('/:id')
+  async getById(@Param('id') id: number): Promise<Return<ContatoDto>> {
     var retorno = await ContatoService.getById(id);
 
     if (retorno.HttpCode != HttpCode.Ok)
-      return retorno;
+      throw new HttpError(retorno.HttpCode, retorno.Message);
 
     return retorno;
   }
 
-  @Get('/contato/search/:text')
-  async getByText(@Param('text') text: string) {
+  @Get('/search/:text')
+  async getByText(@Param('text') text: string): Promise<Return<ContatoDto[]>> {
     var retorno = await ContatoService.getByText(text);
 
     if (retorno.HttpCode != HttpCode.Ok)
-      return retorno;
+      throw new HttpError(retorno.HttpCode, retorno.Message);
 
     return retorno;
   }
 
-  @Post('/contato')
-  async post(@Body() contato: Contato) {
+  @Post('/')
+  async post(@Body() contato: ContatoDto): Promise<Return<ContatoDto>> {
     var retorno = await ContatoService.post(contato);
 
     if (retorno.HttpCode != HttpCode.Ok)
-      return retorno;
+      throw new HttpError(retorno.HttpCode, retorno.Message);
 
     return retorno;
   }
 
-  @Put('/contato/:id')
-  async put(@Param('id') id: number, @Body() contato: Contato) {
+  @Put('/:id')
+  async put(@Param('id') id: number, @Body() contato: ContatoDto): Promise<Return> {
     var retorno = await ContatoService.put(id, contato);
 
     if (retorno.HttpCode != HttpCode.Ok)
-      return retorno;
+      throw new HttpError(retorno.HttpCode, retorno.Message);
 
     return retorno;
   }
 
-  @Delete('/contato/:id')
-  async remove(@Param('id') id: number) {
+  @Delete('/:id')
+  async remove(@Param('id') id: number): Promise<Return> {
     var retorno = await ContatoService.remove(id);
 
     if (retorno.HttpCode != HttpCode.Ok)
-      return retorno;
+      throw new HttpError(retorno.HttpCode, retorno.Message);
 
     return retorno;
   }
