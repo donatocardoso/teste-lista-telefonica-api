@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8080;
 if (process.env.NODE_ENV !== 'test') {
     TypeOrmConnection.init((conn) => {
         const app = createExpressServer({
+            cors: true,
             classTransformer: true,
             validation: false,
             routePrefix: '/api/toki-toki',            
