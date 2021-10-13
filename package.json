@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/api.ts",
   "scripts": {
-    "clean": "rm -rf ./build ./node_modules ./package-lock.json ./yarn.lock",
+    "clean": "rm -rf ./build ./node_modules ./tmp ./package-lock.json ./yarn.lock",
     "typeorm": "ts-node typeorm",
     "dev": "nodemon",
     "build": "tsc --pretty -p ./tsconfig.json",
