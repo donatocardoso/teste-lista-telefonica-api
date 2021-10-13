@@ -4,7 +4,7 @@
    "host": "localhost",
    "username": "root",
    "password": "t0k1t0k1",
-   "database": "/tmp/db_toki_toki",
+   "database": "tmp/db_toki_toki",
    "synchronize": true,
    "logging": false,
    "entities": [
