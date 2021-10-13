@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== 'test') {
     TypeOrmConnection.init((conn) => {
         const app = createExpressServer({
             classTransformer: true,
+            validation: false,
             routePrefix: '/api/toki-toki',            
             controllers: [path.join(__dirname, '/src/controllers/**/*')],
         });
