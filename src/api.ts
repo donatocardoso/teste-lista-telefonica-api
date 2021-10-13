@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'test') {
             classTransformer: true,
             validation: false,
             routePrefix: '/api/toki-toki',            
-            controllers: [path.join(__dirname, '/src/controllers/**/*')],
+            controllers: [path.join(__dirname, '/controllers/**/*')],
         });
         
         app.listen(PORT, () => console.log(`Servidor online na porta ${PORT}...`))

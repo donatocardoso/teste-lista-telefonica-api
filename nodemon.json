@@ -2,5 +2,5 @@
   "watch": ["src", "api.ts"],
   "ext": "ts,json",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "typeorm migration:run && ts-node ./api.ts"
+  "exec": "typeorm migration:run && ts-node ./src/api.ts"
 }
