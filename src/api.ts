@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { createExpressServer } from 'routing-controllers';
 import TypeOrmConnection from './connections/TypeOrm';
 
-const PORT = process.env.PORT || 8080;
+const API_PORT = process.env.API_PORT || 8080;
 
 if (process.env.NODE_ENV !== 'test') {
     TypeOrmConnection.init((conn) => {
@@ -15,6 +15,6 @@ if (process.env.NODE_ENV !== 'test') {
             controllers: [path.join(__dirname, '/src/controllers/**/*')],
         });
         
-        app.listen(PORT, () => console.log(`Servidor online na porta ${PORT}...`))
+        app.listen(API_PORT, () => console.log(`Servidor online na porta ${API_PORT}...`))
     });
 }
